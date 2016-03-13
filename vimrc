@@ -16,6 +16,9 @@ au FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 au FileType json setlocal ts=2 sts=2 sw=2 expandtab
 au FileType markdown setlocal ts=4 sts=4 sw=4 expandtab textwidth=100 wrap linebreak colorcolumn=100
 au BufRead,BufNewFile *.md set filetype=markdown
+au FileType ruby setlocal tabstop=4 expandtab shiftwidth=2 softtabstop=2
+au FileType eruby setlocal tabstop=4 expandtab shiftwidth=2 softtabstop=2
+au FileType css setlocal ts=4 sts=4 sw=4 expandtab
 
 " auto-format JSON
 com! FormatJSON %!python -m json.tool
