@@ -1,6 +1,7 @@
 set number
 set ruler
 set background=dark
+set backspace=indent,eol,start
 
 syntax on
 filetype indent plugin on
