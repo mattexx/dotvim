@@ -10,7 +10,7 @@ au FileType python setlocal tabstop=4 expandtab shiftwidth=4 softtabstop=4 color
 au FileType perl setlocal tabstop=4 expandtab shiftwidth=4 softtabstop=4
 au FileType r setlocal ts=2 sts=2 sw=2 expandtab
 au BufRead,BufNewFile *.R,*.Rmd set filetype=r
-au FileType sh setlocal tabstop=4 expandtab shiftwidth=4 softtabstop=4
+au FileType sh setlocal tabstop=2 expandtab shiftwidth=2 softtabstop=2
 au FileType java setlocal tabstop=4 expandtab shiftwidth=2 softtabstop=2
 au FileType puppet setlocal ts=2 sts=2 sw=2 expandtab
 au FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
