@@ -5,6 +5,7 @@ set backspace=indent,eol,start
 
 syntax on
 filetype indent plugin on
+"au BufRead,BufNewFile *.edn set filetype=clj
 au FileType gitcommit set tw=72 cc=72
 au FileType python setlocal tabstop=4 expandtab shiftwidth=4 softtabstop=4 colorcolumn=80
 au FileType perl setlocal tabstop=4 expandtab shiftwidth=4 softtabstop=4
@@ -35,6 +36,19 @@ au VimEnter * RainbowParenthesesToggle
 au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
+
+" rainbow parens for dark
+let g:rbpt_colorpairs = [
+    \ ['brown',       'RoyalBlue3'],
+    \ ['Darkblue',    'SeaGreen3'],
+    \ ['darkgray',    'DarkOrchid3'],
+    \ ['darkgreen',   'firebrick3'],
+    \ ['darkcyan',    'RoyalBlue3'],
+    \ ['darkred',     'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['brown',       'firebrick3'],
+    \ ]
+let g:rbpt_max = 16
 
 " tmux for slime
 let g:slime_target = "tmux"
