@@ -22,6 +22,10 @@ au FileType ruby setlocal tabstop=4 expandtab shiftwidth=2 softtabstop=2
 au FileType eruby setlocal tabstop=4 expandtab shiftwidth=2 softtabstop=2
 au FileType css setlocal ts=4 sts=4 sw=4 expandtab
 
+" mapping for next/prev block
+map <C-a> /\n\+\n/e+1<CR>
+map <C-x> ?\n\+\n?e+1<CR>
+
 " auto-format JSON
 com! FormatJSON %!python -m json.tool
 
@@ -52,3 +56,5 @@ let g:rbpt_max = 16
 
 " tmux for slime
 let g:slime_target = "tmux"
+let g:slime_python_ipython = 1
+
