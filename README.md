@@ -19,9 +19,9 @@ Context for [SLIME](https://en.wikipedia.org/wiki/SLIME):
     Vim-slime is a humble attempt at getting _some_ of these features into Vim.
     It works with any REPL and isn't tied to Lisp.
 
-Grab some text and send it to a [GNU Screen](http://www.gnu.org/software/screen/) / [tmux](http://tmux.sourceforge.net/) / [whimrepl](https://github.com/malyn/lein-whimrepl) session.
+Grab some text and send it to a [GNU Screen](http://www.gnu.org/software/screen/) / [tmux](https://tmux.github.io/) / [whimrepl](https://github.com/malyn/lein-whimrepl) / [ConEmu](http://conemu.github.io/) session.
 
-    VIM ---(text)---> screen / tmux / whimrepl
+    VIM ---(text)---> screen / tmux / whimrepl / ConEmu
 
 Presumably, your session contains a [REPL](http://en.wikipedia.org/wiki/REPL), maybe Clojure, R or python. If you can type text into it, vim-slime can send text to it.
 
@@ -84,7 +84,7 @@ The name of the file used can be configured through a variable:
     let g:slime_paste_file = tempname()
 
 WARNING: This file is not erased by the plugin and will always contain the last thing
-you sent over. If you're worried about this, you might consider switching to tmux.
+you sent over.
 
 When you invoke vim-slime for the first time, you will be prompted for more configuration.
 
@@ -103,24 +103,10 @@ Tmux is *not* the default, to use it you will have to add this line to your .vim
 
     let g:slime_target = "tmux"
 
-When you invoke vim-slime for the first time, you will be prompted for more configuration.
-
-tmux socket name:
-
-    This is what you put in the -L flag, it will be "default" if you didn't put anything.
-
-tmux target pane:
-
-    ":"     means current window, current pane (a reasonable default)
-    ":i"    means the ith window, current pane
-    ":i.j"  means the ith window, jth pane
-    "h:i.j" means the tmux session where h is the session identifier
-            (either session name or number), the ith window and the jth pane
-    "%i"    means i refers the pane's unique id
-
-By default `STDIN` is used to pass the text to tmux. If you experience issues
-with this you may be able to work around them by configuring slime to use a
-file instead:
+Before tmux 2.2, tmux accepted input from STDIN. This doesn't work anymore. To
+make it work out without explicit config, the default was changed to use a file
+like screen. By default this file is set to `$HOME/.slime_paste`. The name of
+the file used can be configured through a variable:
 
     let g:slime_paste_file = "$HOME/.slime_paste"
     " or maybe...
@@ -128,6 +114,23 @@ file instead:
 
 WARNING: This file is not erased by the plugin and will always contain the last thing
 you sent over.
+
+When you invoke vim-slime for the first time, you will be prompted for more configuration.
+
+tmux socket name:
+
+    If you started tmux with the -L flag, use that same socket name here. If you didn't put anything, the default name is "default".
+
+tmux target pane:
+
+Note that all of these ordinals are 0-indexed by default.
+
+    ":"     means current window, current pane (a reasonable default)
+    ":i"    means the ith window, current pane
+    ":i.j"  means the ith window, jth pane
+    "h:i.j" means the tmux session where h is the session identifier
+            (either session name or number), the ith window and the jth pane
+    "%i"    means i refers the pane's unique id
 
 
 ### whimrepl
@@ -144,6 +147,23 @@ whimrepl server name
     displays that name in its banner every time you start up an instance of
     whimrepl.
 
+### ConEmu
+
+ConEmu is *not* the default, to use it you will have to add this line to your .vimrc:
+
+    let g:slime_target = "conemu"
+
+When you invoke vim-slime for the first time, you will be prompted for more
+configuration.
+
+ConEmu console server HWND
+
+    This is what you put in the -GuiMacro flag. It will be "0" if you didn't put
+    anything, adressing the active tab/split of the first found ConEmu window.
+
+By default the windows clipboard is used to pass the text to ConEmu. If you
+experience issues with this, make sure the `conemuc` executable is in your
+`path`.
 
 Advanced Configuration
 ----------------------
@@ -172,6 +192,9 @@ If you want vim-slime to bypass the prompt and use the specified default configu
 
     let g:slime_dont_ask_default = 1
 
+By default, vim-slime will try to restore your cursor position after it runs. If you don't want that behavior, unset the `g:slime_preserve_curpos` option:
+
+    let g:slime_preserve_curpos = 0
 
 
 Language Support
@@ -190,4 +213,3 @@ might tweak the text without explicit configuration:
   * python / ipython -- [README](ftplugin/python)
   * scala
   * sml
-
